@@ -127,18 +127,11 @@ For maximum flexibility, you can access the text and type of a message directly 
       echo 'Message type: '.$message->type.;
     }
 
-##View Partials##
+##View Partial##
 
-To keep message output code centralized, you can place your message output code in a partial view, and include the partial in your other views.
-
-For convenience, SimpleMessage provides a partial view that outputs all messages using the [Twitter Bootstrap alert class convention][bootstrap]. You can use it by nesting it.
-
-    $view = View::make('items')->nest('messages', 'simplemessage::out');
+For convenience, SimpleMessage provides a partial view that outputs all messages using the [Twitter Bootstrap alert class convention][bootstrap]. Just include it in a [Blade][blade] view:
 
 [bootstrap]: http://twitter.github.com/bootstrap/components.html#alerts
-
-You can also include it in a [Blade][blade] view:
-
 [blade]: http://laravel.com/docs/views/templating#blade-template-engine
 
     @include('simplemessage::out')
