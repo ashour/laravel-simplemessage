@@ -1,6 +1,6 @@
 #Laravel SimpleMessage#
 
-SimpleMessage is a Laravel extension bundle that allows you to easily send messages to your views.
+SimpleMessage is a Laravel extension bundle that allows you to easily send messages to your views, centralizing your application's message system and keeping you <abbr title="Don't Repeat Yourself">DRY</abbr>.
 
     // in a controller or route function
     return Redirect::to('item_list')->with_message('Your item was added.');
@@ -10,11 +10,14 @@ SimpleMessage is a Laravel extension bundle that allows you to easily send messa
       {{ $message }}
     @endforeach
 
-#The Details#
+##Redirecting with Messages##
 
-##Redirecting##
+###Redirect with a message###
 
-    {{-- output all messages --}}
+    return Redirect::to('item_list')->with_message('Your item was added');
+
+###Redirect with a typed message###
+
     @foreach ($messages->all() as $message)
       {{ $message }}
     @endforeach
