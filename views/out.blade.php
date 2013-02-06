@@ -1,5 +1,5 @@
 
-{{-- Outputs messages using format string --}}
+{{-- Outputs all messages using format string --}}
 {{-- Shows all general app messages using Twitter Bootstrap styles --}}
 @foreach ($messages->all('<p class="alert alert-:type">:message</p>') as $message)
   {{ $message }}
