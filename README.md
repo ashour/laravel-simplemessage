@@ -25,7 +25,7 @@ You can install SimpleMessage through [artisan][art-install]:
 
     php artisan bundle:install simplemessage
 
-Once you've installed the bundle, register it by adding an entry in your *application/bundles.php* file:
+Once you've installed the bundle, register it by adding an entry in your application/bundles.php file:
 
     return array('some_other_bundle' => array(...), 'yet_another', 'simplemessage');
 
@@ -34,21 +34,21 @@ Add the bundle to your application/start.php file under `Autoloader::directories
     Autoloader::directories(array(
       path('app').'models',
       path('app').'libraries',
-      *Bundle::path('simplemessage').'src',*
+      Bundle::path('simplemessage').'src',
     ));
 
-Finally, set your `Register` and `View` aliases to use the SimpleMessage classes in *application/config/application.php*. (Don't worry, SimpleMessage simply extends the Laravel core classes):
+Finally, set your `Register` and `View` aliases to use the SimpleMessage classes in application/config/application.php. (Don't worry, SimpleMessage simply extends the Laravel core classes):
 
-  return array(
-    // ... other configs
+    return array(
+      // ... other configs
 
-    'aliases' => array(
-      // ... other aliases
-      *'Redirect'    => 'SimpleMessage\\Redirect',*
-      // ...
-      *'View'        => 'SimpleMessage\\View',*
-    ),
-  );
+      'aliases' => array(
+        // ... other aliases
+        'Redirect'    => 'SimpleMessage\\Redirect',
+        // ...
+        'View'        => 'SimpleMessage\\View',
+      ),
+    );
 
 That's it. You're all installed and ready to use SimplMessage.
 
