@@ -36,12 +36,12 @@ class Messages extends \Laravel\Messages {
 
   /**
    * Add a message. This method is kept for consistency with
-   * the Messaging\Messages class, but it's recommended that you use
+   * the Laravel\Messages class, but it's recommended that you use
    * add_typed() instead.
    * 
    * @param string $key
    * @param string $message
-   * @see  SimpleMessage\Messaging\Messages::add
+   * @see  Laravel\Messaging\Messages::add
    */
   public function add($key, $message)
   {

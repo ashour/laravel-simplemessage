@@ -9,7 +9,7 @@ If you're familiar with [Laravel's validation error messages][validation], you'l
 [validation]: http://laravel.com/docs/validation#retrieving-error-messages
 
     // redirect to a route with a message
-    return Redirect::to('item_list')->with_message('Your item was added.');
+    return Redirect::to('item_list')->with_message('Your item was added.', 'success');
 
     // output messages
     foreach ($messages->all() as $message)
@@ -21,17 +21,18 @@ If you're familiar with [Laravel's validation error messages][validation], you'l
 
 ###Redirect with a message###
 
-    return Redirect::to('item_list')->with_message('Your item was added');
+    return Redirect::to('item_list')
+      ->with_message('Hey, you should know about this.');
 
 ###Redirect with a message and type###
 
     return Redirect::to('item_list')
-      ->with_message('There was a problem adding your thing.', 'error');
+      ->with_message('Your item was added.', 'success');
 
 ###Redirect with multiple messages###
 
     return Redirect::to('item_list')
-      ->with_message('There was a problem adding your thing.', 'error')
+      ->with_message('Your item was added.', 'success')
       ->with_message('Another thing you need to know.', 'info');
 
 ##Outputting Messages##
@@ -47,47 +48,42 @@ SimpleMessage makes a `$messages` variables available to all your views. It work
 
 ###Outputting all messages of a given type###
   
-    foreach ($messages->get('error') as $message)
+    foreach ($messages->get('success') as $message)
     {
       echo $message;
     }
   
-###Outputting first message of all types###
+###Outputting first message of all messages###
 
     echo $messages->first();
 
 ###Outputting first message of a given type###
 
-    echo $messages->first('error');
+    echo $messages->first('success');
 
 ##Formatting##
 
 If you're using something like Twitter Bootstrap, or using your own CSS styling,
-you'll appreciate SimpleMessage's message formatting. The `all()`, `get()`, and
-`first()` methods take an optional format parameter that allows you to easily format your messages.
+you'll appreciate SimpleMessage's message formatting. Just like Laravel's validation errors, the `all()`, `get()`, and `first()` methods take an optional format parameter that allows you to easily format your messages, using `:message` and `:type` placeholders.
 
 ###Outputting all messages with formatting###
 
-    foreach ($messages->all('<p class="alert">:message</p>') as $message)
+    foreach ($messages->all('<p>:message</p>') as $message)
     {
       echo $message;
     }
 
 ###Outputting all messages of a given type with formatting###
 
-    foreach ($messages->get('error', <p class="alert alert-:type">:message</p>') as $message)
+    foreach ($messages->get('error', <p class=":type">:message</p>') as $message)
     {
       echo $message;
     }
 
-###Outputting first message of a type with formatting###
-
-    echo $messages->first('error', '<p class="alert alert-:type">:message</p>');
-
 ##Message Attributes##
 
-For maximum flexibility, you can access the text and type messages attributes
-directly. 
+For maximum flexibility, you can access the text and type of a message directly
+through message attributes.
 
 ###Output all messages using message attributes###
 
@@ -99,11 +95,9 @@ directly.
 
 ##View Partials##
 
-To keep message output code centralized, you can use Laravel
-place your message output code in a partial view, which you can include
-in other views.
+To keep message output code centralized, you can place your message output code in a partial view, and include the partial in your other views.
 
-For your convenience, SimpleMessage provides two partial views that you can use to output your messages within other views. The SimpleMessage partials use the [Twitter Bootstrap alert class convention][bootstrap].
+For your convenience, SimpleMessage provides two partial views. The SimpleMessage partials use the [Twitter Bootstrap alert class convention][bootstrap].
 
 [bootstrap]: http://twitter.github.com/bootstrap/components.html#alerts
 
@@ -121,7 +115,7 @@ Using Laravel's [Blade][blade] templating engine,
 
 ##Unit Tests##
 
-I've tried to test the SimpleMessage bundle as thoroughly as possible. You can run the SimpleMessage tests through Laravel's [artisan][artisan]:
+I've tried to test the SimpleMessage bundle as thoroughly as possible. You can run the SimpleMessage tests through Laravel's [artisan][artisan] command-line utility:
 
 [artisan]: http://laravel.com/docs/artisan/commands#unit-tests
 
