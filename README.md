@@ -1,6 +1,6 @@
 #Laravel SimpleMessage#
 
-SimpleMessage is a Laravel extension bundle that allows you to easily send messages to your views, centralizing your application's message system and keeping you [DRY][dry].
+SimpleMessage is a Laravel extension bundle that allows you to easily send messages to your views, centralizing your application's message system and keeping you nice and [DRY][dry].
 
 [dry]: http://en.wikipedia.org/wiki/Don't_repeat_yourself "Don't Repeat Yourself"
 
@@ -25,11 +25,17 @@ You can install SimpleMessage through [artisan][art-install]:
 
     php artisan bundle:install simplemessage
 
-Once you've installed the bundle, register it by adding an entry in your application/bundles.php file:
+Or through github: [http://github.com/ashour/laravel-simplemessage][github]
+
+[github]: http://github.com/ashour/laravel-simplemessage
+
+If you get it through github, make sure to copy the **laravel-simplmessage** directory into your bundles directory, and to rename it **simplemessage**.
+
+Once you've installed the bundle, register it by adding an entry in your **application/bundles.php** file:
 
     return array('some_other_bundle' => array(...), 'yet_another', 'simplemessage');
 
-Add the bundle to your application/start.php file under `Autoloader::directories`:
+Add the bundle to your **application/start.php** file under `Autoloader::directories`:
 
     Autoloader::directories(array(
       path('app').'models',
@@ -37,7 +43,7 @@ Add the bundle to your application/start.php file under `Autoloader::directories
       Bundle::path('simplemessage').'src',
     ));
 
-Finally, set your `Register` and `View` aliases to use the SimpleMessage classes in application/config/application.php. (Don't worry, SimpleMessage simply extends the Laravel core classes):
+Finally, set your `Register` and `View` aliases to use the SimpleMessage classes in **application/config/application.php**. (Don't worry, SimpleMessage simply extends the Laravel core classes):
 
     return array(
       // ... other configs
@@ -50,9 +56,11 @@ Finally, set your `Register` and `View` aliases to use the SimpleMessage classes
       ),
     );
 
-That's it. You're all installed and ready to use SimplMessage.
+That's it. You're all installed and ready to use SimpleMessage.
 
 ##Redirecting with Messages##
+
+When you want to send a message to a view via redirect, say to send a success message that notifies the user that an item was added, just use the simple `with_message` method.
 
 ###Redirect with a message###
 
@@ -98,7 +106,7 @@ SimpleMessage makes a `$messages` variable available to all your views. It works
 
 ##Formatting##
 
-If you're using something like Twitter Bootstrap, or using your own CSS styling, you'll appreciate SimpleMessage's message formatting. Just like Laravel's validation errors, SimpleMessage's output methods take an optional format parameter, which allows you to easily format your messages using `:message` and `:type` placeholders.
+If you're using something like Twitter Bootstrap, or your own CSS styling, you'll appreciate SimpleMessage's message formatting. Just like Laravel's validation errors, SimpleMessage's output methods take an optional format parameter, which allows you to easily format your messages using `:message` and `:type` placeholders.
 
 ###Output all messages with formatting###
 
@@ -109,8 +117,7 @@ If you're using something like Twitter Bootstrap, or using your own CSS styling,
 
 ##Message Attributes##
 
-For maximum flexibility, you can access the text and type of a message directly
-through message attributes.
+For maximum flexibility, you can access the text and type of a message directly through message attributes.
 
 ###Output all messages using message attributes###
 
@@ -124,14 +131,13 @@ through message attributes.
 
 To keep message output code centralized, you can place your message output code in a partial view, and include the partial in your other views.
 
-For your convenience, SimpleMessage provides a partial views that outputs
-all messages using the [Twitter Bootstrap alert class convention][bootstrap].
+For convenience, SimpleMessage provides a partial view that outputs all messages using the [Twitter Bootstrap alert class convention][bootstrap]. You can use it by nesting it.
+
+    $view = View::make('items')->nest('messages', 'simplemessage::out');
 
 [bootstrap]: http://twitter.github.com/bootstrap/components.html#alerts
 
-###Output all messages using the included view partial###
-
-Using Laravel's [Blade][blade] templating engine,
+You can also include it in a [Blade][blade] view:
 
 [blade]: http://laravel.com/docs/views/templating#blade-template-engine
 
