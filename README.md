@@ -11,7 +11,7 @@ If you're familiar with [Laravel's validation error messages][validation], you'l
     // redirect to a route with a message
     return Redirect::to('item_list')->with_message('Your item was added.', 'success');
 
-    // output messages
+    // retrieve messages
     foreach ($messages->all() as $message)
     {
       echo $message;
@@ -29,7 +29,7 @@ Or through github: [http://github.com/ashour/laravel-simplemessage][github]
 
 [github]: http://github.com/ashour/laravel-simplemessage
 
-If you get it through github, make sure to copy the **laravel-simplmessage** directory into your bundles directory, and to rename it **simplemessage**.
+If you get it through github, make sure to copy the **laravel-simplemessage** directory into your bundles directory, and to rename it **simplemessage**.
 
 Once you've installed the bundle, register it by adding an entry in your **application/bundles.php** file:
 
@@ -50,8 +50,10 @@ Finally, set your `Register` and `View` aliases to use the SimpleMessage classes
 
       'aliases' => array(
         // ... other aliases
+        //'Redirect'    => 'Laravel\\Redirect',
         'Redirect'    => 'SimpleMessage\\Redirect',
         // ...
+        //'View'        => 'Laravel\\View',
         'View'        => 'SimpleMessage\\View',
       ),
     );
@@ -78,39 +80,67 @@ When you want to send a message to a view via redirect, say to send a success me
       ->with_message('Your item was added.', 'success')
       ->with_message('Another thing you need to know.', 'info');
 
-##Outputting Messages##
+##Retreiving Messages##
 
-SimpleMessage makes a `$messages` variable available to all your views. It works the same way as Laravel's validation `$error` variable.
+SimpleMessage makes a `$messages` object available to all your views. It works the similarly to Laravel's validation `$errors` object.
 
-###Output all messages###
+###Retrieve all messages###
 
     foreach ($messages->all() as $message)
     {
       echo $message;
     }
 
-###Output all messages of a given type###
+###Retrieve all messages of a given type###
   
     foreach ($messages->get('success') as $message)
     {
       echo $message;
     }
   
-###Output first message of all messages###
+###Retrieve first message of all messages###
 
     echo $messages->first();
 
-###Output first message of a given type###
+###Retrieve first message of a given type###
 
     echo $messages->first('success');
 
+##Check if messages of a given type exist###
+
+    if ($messages->has('success'))
+    {
+      echo $messages->first('success');
+    }
+
 ##Formatting##
 
-If you're using something like Twitter Bootstrap, or your own CSS styling, you'll appreciate SimpleMessage's message formatting. Just like Laravel's validation errors, SimpleMessage's output methods take an optional format parameter, which allows you to easily format your messages using `:message` and `:type` placeholders.
+If you're using something like Twitter Bootstrap, or your own CSS styling, you'll appreciate SimpleMessage's message formatting. Just like Laravel's validation errors, SimpleMessage's retrieval methods take an optional format parameter, which allows you to easily format your messages using `:message` and `:type` placeholders.
 
-###Output all messages with formatting###
+###Retrieve all messages with formatting###
 
     foreach ($messages->all('<p class=":type">:message</p>') as $message)
+    {
+      echo $message;
+    }
+
+###Retrieve all messages of given type with formatting###
+
+    foreach ($messages->get('success', <p class=":type">:message</p>') as $message)
+    {
+      echo $message;
+    }
+
+###Retrieve first message of given type with formatting###
+
+    foreach ($messages->first('success', <p class=":type">:message</p>') as $message)
+    {
+      echo $message;
+    }
+
+###Retrieve first message of all messages with formatting###
+
+    foreach ($messages->first(null, <p>:message</p>') as $message)
     {
       echo $message;
     }
@@ -119,7 +149,7 @@ If you're using something like Twitter Bootstrap, or your own CSS styling, you'l
 
 For maximum flexibility, you can access the text and type of a message directly through message attributes.
 
-###Output all messages using message attributes###
+###Access message attributes###
 
     foreach ($messages->all() as $message)
     {

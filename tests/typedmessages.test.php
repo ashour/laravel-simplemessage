@@ -143,13 +143,16 @@ class TypedMessagesTest extends PHPUnit_Framework_TestCase {
   }
 
   /**
+   * Test the Messages::first method.
    * Test the Messages::get method.
+   * Test the Messages::all method.
    *
    * @group laravel
    */
   public function testMessagesRespectFormat()
   {
     $this->messages->add_typed('ok', 'success');
+    $this->assertEquals(new Entry('<p class="success">ok</p>', 'success'), $this->messages->first(null, '<p class=":type">:message</p>'));
     $this->assertEquals(new Entry('<p class="success">ok</p>', 'success'), $this->messages->first('success', '<p class=":type">:message</p>'));
     $this->assertEquals(array(new Entry('<p class="success">ok</p>', 'success')), $this->messages->get('success', '<p class=":type">:message</p>'));
     $this->assertEquals(array(new Entry('<p class="success">ok</p>', 'success')), $this->messages->all('<p class=":type">:message</p>'));
