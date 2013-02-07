@@ -106,7 +106,7 @@ SimpleMessage makes a `$messages` object available to all your views. It works t
 
     echo $messages->first('success');
 
-##Check if messages of a given type exist###
+###Check if messages of a given type exist###
 
     if ($messages->has('success'))
     {
@@ -124,26 +124,20 @@ If you're using something like Twitter Bootstrap, or your own CSS styling, you'l
       echo $message;
     }
 
-###Retrieve all messages of given type with formatting###
+###Retrieve all messages of a given type with formatting###
 
     foreach ($messages->get('success', <p class=":type">:message</p>') as $message)
     {
       echo $message;
     }
 
-###Retrieve first message of given type with formatting###
+###Retrieve first message of a given type with formatting###
 
-    foreach ($messages->first('success', <p class=":type">:message</p>') as $message)
-    {
-      echo $message;
-    }
+    echo $messages->first('success', <p class=":type">:message</p>');
 
 ###Retrieve first message of all messages with formatting###
 
-    foreach ($messages->first(null, <p>:message</p>') as $message)
-    {
-      echo $message;
-    }
+    echo $messages->first(null, <p>:message</p>');
 
 ##Message Attributes##
 
