@@ -137,7 +137,7 @@ If you're using something like Twitter Bootstrap, or your own CSS styling, you'l
 
 ###Retrieve first message of all messages with formatting###
 
-    echo $messages->first(null, '<p>:message</p>');
+    echo $messages->first(null, '<p class=":type">:message</p>');
 
 ##Message Attributes##
 
