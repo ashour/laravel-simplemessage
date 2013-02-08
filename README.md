@@ -82,7 +82,7 @@ When you want to send a message to a view via redirect, say to send a success me
 
 ##Retrieving Messages##
 
-SimpleMessage makes a `$messages` object available to all your views. It works the similarly to Laravel's validation `$errors` object.
+SimpleMessage makes a `$messages` object available to all your views. It works similarly to Laravel's validation `$errors` object.
 
 ###Retrieve all messages###
 
