@@ -126,18 +126,18 @@ If you're using something like Twitter Bootstrap, or your own CSS styling, you'l
 
 ###Retrieve all messages of a given type with formatting###
 
-    foreach ($messages->get('success', <p class=":type">:message</p>') as $message)
+    foreach ($messages->get('success', '<p class=":type">:message</p>') as $message)
     {
       echo $message;
     }
 
 ###Retrieve first message of a given type with formatting###
 
-    echo $messages->first('success', <p class=":type">:message</p>');
+    echo $messages->first('success', '<p class=":type">:message</p>');
 
 ###Retrieve first message of all messages with formatting###
 
-    echo $messages->first(null, <p>:message</p>');
+    echo $messages->first(null, '<p>:message</p>');
 
 ##Message Attributes##
 
