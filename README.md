@@ -25,7 +25,7 @@ Update SimpleMessage [using artisan]:
   
 [using artisan]: http://laravel.com/docs/bundles#upgrading-bundles
 
-    php artisan bundle:upgrade 
+    php artisan bundle:upgrade simplemessage
 
 That should do it. Or, if you're [using github][github], simply download the bundle code again and replace the **simplemessage** directory. 
 
