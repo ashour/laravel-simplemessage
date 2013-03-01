@@ -79,6 +79,25 @@ When you want to send a message to a view via redirect, say to send a success me
     return Redirect::to('item_list')
       ->with_message('Your item was added.', 'success')
       ->with_message('Another thing you need to know.', 'info');
+      
+##Localized Messages##
+If your application is displayed in multiple languages, SimpleMessage provides a
+  `with_lang_message` method for redirecting with localized messages. Provide
+   the key of the language line you wish to display, just as you would with 
+   [Laravel's `Lang::line()` method or `__()` function][lang_get].
+    
+[lang_get]: http://laravel.com/docs/localization#get
+
+###Redirect with a localized message###
+
+    return Redirect::to('item_list')
+      ->with_lang_message('items.messages.item_added');
+      
+###Redirect with a localized message and type###
+
+    return Redirect::to('item_list)
+      ->with_lang_message('items.messages.item_added', 'success');
+
 
 ##Retrieving Messages##
 
