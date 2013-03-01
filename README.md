@@ -17,6 +17,18 @@ If you're familiar with [Laravel's validation error messages][validation], you'l
       echo $message;
     }
 
+##Updates##
+* 2013-03-01 Added `Redirect::with_lang_message()` convenience method, which allows sending localized messages to views.
+
+###How to Update###
+Update SimpleMessage [using artisan]:
+  
+[using artisan]: http://laravel.com/docs/bundles#upgrading-bundles
+
+    php artisan bundle:upgrade 
+
+That should do it. Or, if you're [using github][github], simply download the bundle code again and replace the **simplemessage** directory. 
+
 ##Installation##
 
 You can install SimpleMessage through [artisan][art-install]:
@@ -62,7 +74,7 @@ That's it. You're all installed and ready to use SimpleMessage.
 
 ##Redirecting with Messages##
 
-When you want to send a message to a view via redirect, say to send a success message that notifies the user that an item was added, just use the simple `with_message` method.
+When you want to send a message to a view via redirect, say to send a success message that notifies the user that an item was added, just use the simple `with_message()` method.
 
 ###Redirect with a message###
 
@@ -81,22 +93,19 @@ When you want to send a message to a view via redirect, say to send a success me
       ->with_message('Another thing you need to know.', 'info');
       
 ##Localized Messages##
-If your application is displayed in multiple languages, SimpleMessage provides a
-  `with_lang_message` method for redirecting with localized messages. Provide
-   the key of the language line you wish to display, just as you would with 
-   [Laravel's `Lang::line()` method or `__()` function][lang_get].
+If your application is displayed in multiple languages, SimpleMessage provides a `with_lang_message()` method for redirecting with localized messages. Provide the key of the language line you wish to display, just as you would with [Laravel's `Lang::line()` method or `__()` function][lang_get].
     
 [lang_get]: http://laravel.com/docs/localization#get
 
 ###Redirect with a localized message###
 
     return Redirect::to('item_list')
-      ->with_lang_message('items.messages.item_added');
+      ->with_lang_message('items.item_added');
       
 ###Redirect with a localized message and type###
 
-    return Redirect::to('item_list)
-      ->with_lang_message('items.messages.item_added', 'success');
+    return Redirect::to('item_list')
+      ->with_lang_message('items.item_added', 'success');
 
 
 ##Retrieving Messages##
@@ -186,4 +195,3 @@ I've tried to test the SimpleMessage bundle as thoroughly as possible. You can r
 [artisan]: http://laravel.com/docs/artisan/commands#unit-tests
 
     php artisan test simplemessage
-
