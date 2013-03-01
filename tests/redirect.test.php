@@ -31,9 +31,7 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * Tests the Redirect::with_message() method.
-	 *
-	 * @group laravel 
+	 * Tests the Redirect::with_message() method. 
 	 */
 	public function testWithMessageFlashesMessagesToTheSession()
 	{
@@ -47,8 +45,6 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * Tests the Redirect::with_message() method.
-	 *
-	 * @group laravel 
 	 */
 	public function testWithMessageFlashesMessagesWithTypeToTheSession()
 	{
@@ -58,6 +54,33 @@ class RedirectTest extends PHPUnit_Framework_TestCase {
 
 		$actual = Session::$instance->session['data'][':new:']['messages'];
 		$this->assertEquals('Your thing was added', $actual->first()->text);
+		$this->assertEquals('success', $actual->first()->type);
+	}
+
+	/**
+	 * Tests the Redirect::with_lang_message() method.
+	 */
+	public function testWithLangMessageFlashesLanguageLineToTheSession()
+	{
+		$this->setSession();
+
+		Redirect::to('')->with_lang_message('simplemessage::test.test_line');
+
+		$actual = Session::$instance->session['data'][':new:']['messages'];
+		$this->assertEquals('used for unit testing', $actual->first()->text);
+	}
+
+	/**
+	 * Tests the Redirect::with_lang_message() method.
+	 */
+	public function testWithLangMessageFlashesMessagesWithTypeToSession()
+	{
+		$this->setSession();
+
+		Redirect::to('')->with_lang_message('simplemessage::test.test_line', 'success');
+
+		$actual = Session::$instance->session['data'][':new:']['messages'];
+		$this->assertEquals('used for unit testing', $actual->first()->text);
 		$this->assertEquals('success', $actual->first()->type);
 	}
 
